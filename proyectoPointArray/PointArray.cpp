@@ -88,6 +88,8 @@ void PointArray::insert(const int pos, const Point & p)
 	points[pos] = p;*/
 }
 
+///////////// TAREA DE LABORATORIO  /////////////////
+
 void PointArray::remove(const int pos)
 {
 	Point *pts = new Point[size-1];
@@ -108,3 +110,5 @@ PointArray::~PointArray()
 {
 	delete[] points;
 }
+
+/////// TESTING /////////
