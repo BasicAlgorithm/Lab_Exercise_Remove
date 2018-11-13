@@ -3,10 +3,11 @@
 
 #include "Point.h"
 
+template <typename U>
 class PointArray {
 public:
 	PointArray();
-	PointArray(const Point pts[], const int size);
+	PointArray(const U pts[], const int size);
 	PointArray(PointArray &o);
 	
 	~PointArray();
@@ -14,15 +15,15 @@ public:
 	int getSize();
 	void clear();
 	void print();
-	void push_back(const Point &p);
-	void insert(const int, const Point &p);
+	void push_back(const U &p);
+	void insert(const int, const U &p);
 	void remove(const int);
 
 protected:
 
 private:
 	int size;
-	Point *points;
+	U *points;
 	void resize(int);
 		
 };

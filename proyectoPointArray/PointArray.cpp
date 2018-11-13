@@ -4,70 +4,79 @@
 
 using namespace std;
 
-PointArray::PointArray() 
+template <typename U>
+PointArray<U>::PointArray() 
 {
 	this->size = 0;
-	this->points = new Point[size];
+	this->points = new U[size];
 }
 
-PointArray::PointArray(const Point pts[], const int size) 
+template <typename U>
+PointArray<U>::PointArray(const U pts[], const int size) 
 {
 	this->size = size;
-	this->points = new Point[size];
+	this->points = new U[size];
 	for (int i = 0; i < size; i++) {
 		points[i] = pts[i];
 	}
 }
 
-PointArray::PointArray(PointArray &o) 
+template <typename U>
+PointArray<U>::PointArray(PointArray &o) 
 {
 	this->size = o.size;
-	this->points = new Point[size];
+	this->points = new U[size];
 	for (int i = 0; i < size; i++) {
 		points[i] = o.points[i];
 	}
 }
 
-void PointArray::resize(int newSize) 
+template <typename U>
+void PointArray<U>::resize(int newSize) 
 {
-	Point *pts = new Point[newSize];
+	U *pts = new U[newSize];
 	int minsize = (newSize > size) ? size : newSize;
 	for (int i = 0; i < minsize; i++) {
 		pts[i] = points[i];
 	}
-	Point *sss = points;
+	U *sss = points;
 	points = pts;
 	delete[] sss;
 	size = newSize;
 }
 
-int PointArray::getSize() 
+template <typename U>
+int PointArray<U>::getSize() 
 {
 	return size;
 }
 
-void PointArray::clear()
+template <typename U>
+void PointArray<U>::clear()
 {
 	resize(0);
 }
 
-void PointArray::print() 
+template <typename U>
+void PointArray<U>::print() 
 {
 	for (int i = 0; i < size; i++) {
 		points[i].print();
 	}
 }
 
-void PointArray::push_back(const Point &p)
+template <typename U>
+void PointArray<U>::push_back(const U &p)
 {
 	resize(size + 1);
 	points[size - 1] = p;
 }
 
-void PointArray::insert(const int pos, const Point & p)
+template <typename U>
+void PointArray<U>::insert(const int pos, const U & p)
 {	
 	resize(size + 1);
-	Point *pts = new Point[size];
+	U *pts = new U[size];
 	int w = 0;
 	for (int i = 0; i < size; i++) {
 		if (i == pos) {
@@ -78,7 +87,7 @@ void PointArray::insert(const int pos, const Point & p)
 		w++;
 	}
 	
-	Point *sss = points;
+	U *sss = points;
 	points = pts;
 	delete[] sss;
 	
@@ -91,10 +100,10 @@ void PointArray::insert(const int pos, const Point & p)
 
 ///////////// TAREA DE LABORATORIO  /////////////////
 
-
-void PointArray::remove(const int pos)
+template <typename U>
+void PointArray<U>::remove(const int pos)
 {
-	Point *pts = new Point[size-1];
+	U *pts = new U[size-1];
 	int w = 0;
 	for (int i = 0; i < size; i++) {
 		if (i == pos) continue;
@@ -102,13 +111,14 @@ void PointArray::remove(const int pos)
 		w++;
 	}
 
-	Point *sss = points;
+	U *sss = points;
 	points = pts;
 	delete[] sss;
 	size--;
 }
 
-PointArray::~PointArray()
+template <typename U>
+PointArray<U>::~PointArray()
 {
 	delete[] points;
 }
